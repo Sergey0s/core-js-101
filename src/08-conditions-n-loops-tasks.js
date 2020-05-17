@@ -176,8 +176,14 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  let res = null;
+  str.split('').forEach((el, i, array) => {
+    if ((array.indexOf(el) === array.lastIndexOf(el)) && (res === null)) {
+      res = el;
+    }
+  });
+  return res;
 }
 
 
@@ -203,10 +209,19 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let sign1 = '(';
+  let sign2 = ')';
+  if (isStartIncluded) sign1 = '[';
+  if (isEndIncluded) sign2 = ']';
+  const res = [];
+  res.push(sign1);
+  res.push(Math.min(a, b));
+  res.push(', ');
+  res.push(Math.max(a, b));
+  res.push(sign2);
+  return res.join('');
 }
-
 
 /**
  * Reverse the specified string (put all chars in reverse order)
@@ -220,8 +235,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -237,8 +252,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +num.toString().split('').reverse().join('');
 }
 
 
@@ -280,8 +295,9 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  if (num < 10) return num;
+  return getDigitalRoot(num.toString().split('').reduce((a, b) => a + parseInt(b, 10), 0));
 }
 
 
@@ -306,10 +322,34 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-}
+function isBracketsBalanced(str) {
+  // if (str.length === 0) return true;
+  // if (str.length === 1) return false;
+  //
+  // const splitedStr = str.split('');
+  // if (splitedStr[0] === '{' && splitedStr.includes('}')) {
+  //   splitedStr.shift();
+  //   splitedStr.splice(splitedStr.indexOf('}'), 1);
+  // } else if (splitedStr[0] === '[' && splitedStr.includes(']')) {
+  //   splitedStr.shift();
+  //   splitedStr.splice(splitedStr.indexOf(']'), 1);
+  // } else if (splitedStr[0] === '<' && splitedStr.includes('>')) {
+  //   splitedStr.shift();
+  //   splitedStr.splice(splitedStr.indexOf('>'), 1);
+  // } else if (splitedStr[0] === '(' && splitedStr.includes(')')) {
+  //   splitedStr.shift();
+  //   splitedStr.splice(splitedStr.indexOf(')'), 1);
+  // } else return false;
+  // return isBracketsBalanced(splitedStr.join(''));
 
+  let strLength = 0;
+  let updStr = str;
+  while (strLength !== updStr.length) {
+    strLength = updStr.length;
+    updStr = updStr.replace('[]', '').replace('{}', '').replace('()', '').replace('<>', '');
+  }
+  return updStr.length === 0;
+}
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -331,8 +371,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
