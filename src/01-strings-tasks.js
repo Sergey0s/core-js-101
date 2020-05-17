@@ -208,11 +208,11 @@ function getRectangleString(width, height) {
   // let sideLine = '';
   // let fullSide = '';
   //
-  // for (let i = 0; i < width - 2; i + 1) { topLine += '─'; }
+  // for (let i = 0; i < width - 2; i += 1) { topLine += '─'; }
   // const top = `\n┌${topLine}┐\n`;
   // const bottom = `└${topLine}┘\n`;
   //
-  // for (let i = 1; i <= width; i + 1) {
+  // for (let i = 1; i <= width; i += 1) {
   //   if (i === 1 || i === width) {
   //     sideLine += '│';
   //   } else if (i > 1 && i < width) {
@@ -220,7 +220,7 @@ function getRectangleString(width, height) {
   //   }
   // }
   //
-  // for (let i = 0; i < height - 2; i + 1) {
+  // for (let i = 0; i < height - 2; i += 1) {
   //   fullSide += `${sideLine}\n`;
   // }
   // return top + fullSide + bottom;
