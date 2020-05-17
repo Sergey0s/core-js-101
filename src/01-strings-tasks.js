@@ -5,7 +5,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-
 /**
  * Returns the result of concatenation of two strings.
  *
@@ -112,9 +111,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-  let word = '';
-  for (let i = 0; i < count; i + 1) { word += value; }
-  return word;
+  return value.repeat(count);
 }
 
 /**
@@ -182,47 +179,57 @@ function extractEmails(str) {
   return str.split(';');
 }
 
-/**
- * Returns the string representation of rectangle with specified width and height
- * using pseudograhic chars
- *
- * @param {number} width
- * @param {number} height
- * @return {string}
- *
- * @example
- *
- *            '┌────┐\n'+
- *  (6,4) =>  '│    │\n'+
- *            '│    │\n'+
- *            '└────┘\n'
- *
- *  (2,2) =>  '┌┐\n'+
- *            '└┘\n'
- *
- *             '┌──────────┐\n'+
- *  (12,3) =>  '│          │\n'+
- *             '└──────────┘\n'
- *
- */
+// /**
+//  * Returns the string representation of rectangle with specified width and height
+//  * using pseudograhic chars
+//  *
+//  * @param {number} width
+//  * @param {number} height
+//  * @return {string}
+//  *
+//  * @example
+//  *
+//  *            '┌────┐\n'+
+//  *  (6,4) =>  '│    │\n'+
+//  *            '│    │\n'+
+//  *            '└────┘\n'
+//  *
+//  *  (2,2) =>  '┌┐\n'+
+//  *            '└┘\n'
+//  *
+//  *             '┌──────────┐\n'+
+//  *  (12,3) =>  '│          │\n'+
+//  *             '└──────────┘\n'
+//  *
+//  */
 function getRectangleString(width, height) {
-  let topLine = '';
-  let sideLine = '';
-  for (let i = 0; i < width - 2; i + 1) { topLine += '─'; }
-  const top = `\n┌${topLine}┐\n`;
-  const bottom = `└${topLine}┘\n`;
-  for (let i = 1; i <= width; i + 1) {
-    if (i === 1 || i === width) {
-      sideLine += '│';
-    } else if (i > 1 && i < width) {
-      sideLine += ' ';
-    }
-  }
-  let fullSide = '';
-  for (let i = 0; i < height - 2; i + 1) {
-    fullSide += `${sideLine}\n`;
-  }
-  return top + fullSide + bottom;
+  // console.log(width, height);
+  // let topLine = '';
+  // let sideLine = '';
+  // let fullSide = '';
+  //
+  // for (let i = 0; i < width - 2; i + 1) { topLine += '─'; }
+  // const top = `\n┌${topLine}┐\n`;
+  // const bottom = `└${topLine}┘\n`;
+  //
+  // for (let i = 1; i <= width; i + 1) {
+  //   if (i === 1 || i === width) {
+  //     sideLine += '│';
+  //   } else if (i > 1 && i < width) {
+  //     sideLine += ' ';
+  //   }
+  // }
+  //
+  // for (let i = 0; i < height - 2; i + 1) {
+  //   fullSide += `${sideLine}\n`;
+  // }
+  // return top + fullSide + bottom;
+
+  const top = `┌${'─'.repeat(width - 2)}┐\n`;
+  const mid = `│${' '.repeat(width - 2)}│\n`;
+  const bottom = `└${'─'.repeat(width - 2)}┘\n`;
+
+  return `${top}${mid.repeat(height - 2)}${bottom}`;
 }
 
 
@@ -243,8 +250,16 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-  const arren = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  const arrEN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  const arren = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+    'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+    'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  const arrEN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+    'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
   const arr1 = str.split('').map((el) => {
     if (arren.includes(el)) {
@@ -271,7 +286,11 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return typeof value === 'string';
+  return (
+    value !== null
+    && value !== undefined
+    && (value.toString() === value || (value instanceof String))
+  );
 }
 
 
@@ -300,8 +319,18 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const cards = ['Aclubs', '2clubs', '3clubs', '4clubs', '5clubs', '6clubs', '7clubs', '8clubs', '9clubs', '10clubs', 'Jclubs', 'Qclubs', 'Kclubs', 'Adiamonds', '2diamonds', '3diamonds', '4diamonds', '5diamonds', '6diamonds', '7diamonds', '8diamonds', '9diamonds', '10diamonds', 'Jdiamonds', 'Qdiamonds', 'Kdiamonds', 'Ahearts', '2hearts', '3hearts', '4hearts', '5hearts', '6hearts', '7hearts', '8hearts', '9hearts', '10hearts', 'Jhearts', 'Qhearts', 'Khearts', 'Aspades', '2spades', '3spades', '4spades', '5spades', '6spades', '7spades', '8spades', '9spades', '10spades', 'Jspades', 'Qspades', 'Kspades'];
-  return cards.indexOf(value);
+  const map = {
+    '♣': 0,
+    '♦': 13,
+    '♥': 26,
+    '♠': 39,
+    A: 0,
+    J: 10,
+    Q: 11,
+    K: 12,
+  };
+  const tmpValue = value.slice(0, value.length - 1);
+  return (tmpValue in map ? map[tmpValue] : (+tmpValue - 1)) + map[value.slice(value.length - 1)];
 }
 
 
